@@ -2,8 +2,8 @@
 \usepackage[utf8]{inputenc}
 \usefonttheme{structurebold}
 \usepackage{cabin}
-
-
+\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage{multimedia}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -81,7 +81,7 @@ The need for a hardware-based password manager is justified answering these thre
 \end{block}
 
 \begin{block}<6,7,8>{Why are hardware-based approaches more reliable?}
-\onslide<7,8> {Hardware approaches use two-factor authentication.}
+\onslide<7,8> {To authenticate it ask for master password + device}
 \end{block}
 
 %\begin{itemize}
@@ -134,28 +134,59 @@ The need for a hardware-based password manager is justified answering these thre
 The following open source libraries were used:
 
 \begin{block}<2,3,10>{Qt: GUI and wrappers}
-\onslide<3,10> {Compatible with C/C++, Cross-platform}
+\onslide<3,10> {C++ library, cross-platform, elegant design}
 \end{block}
 
 \begin{block}<4,5,10>{SQLite: DataBase management}
-\onslide<5,10> {Self-contained...}
+\onslide<5,10> {Self-contained, written in C, Transactional}
 \end{block}
 
 \begin{block}<6,7,10>{PwGen: Password generator}
-\onslide<7,10> {Strong Random or readable}
+\onslide<7,10> {Configurable, random or readable}
 \end{block}
 
 \begin{block}<8,9,10>{zxcvbn: Password strength estimator}
-\onslide<9,10> {Considers a lot of cases....}
+\onslide<9,10> {Dictionaries, keyboard patterns, sequences, years}
 \end{block}
+\end{frame}
+
+% ----------------------------------
+
+\subsection{SEcube™ Framework}
+
+\begin{frame}
+\frametitle{The SEcube™ Framework}
+
+
+
 \end{frame}
 
 \begin{frame}
 \frametitle{SEcube™ APIs hierarchy}
+\setlength{\TPboxrulesize}{1pt}
+\TPMargin{7pt}
+\textblockrulecolour{red!70!black}
+%\textblockrulecolour{white}
+
 \begin{center}
-\includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{levels}
+\includegraphics<1>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsHW}
+\includegraphics<2>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL0}
+\includegraphics<3>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL1}
+\includegraphics<4>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL2}
+\includegraphics<5>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levels}
 \end{center}
+
+\only<2->{
+ \begin{textblock}{4.5}(10,3)
+  \only<2>{\footnotesize \color{black} Device discovery \\ Open Connection\\ \hfill  }
+  \only<3>{\footnotesize \color{black} Authentication \\ Get Algorithms\\ \hfill}
+  \only<4>{\footnotesize \color{black} SEfile \\ secureSQLite \\ SElink}
+  \only<5>{\footnotesize \color{black} secureSQLiteBrowser \\ SEcubeWallet\\ \hfill}
+ \end{textblock}
+}
 \end{frame}
+
+%---------------------------------------------------------------
 
 \section{Design}
 
@@ -178,6 +209,43 @@ The following open source libraries were used:
 
 \end{center}
 \end{frame}
+
+%-------------------------------------------
+
+\begin{frame}
+\frametitle{Login and Open a Wallet}
+\begin{center}
+\makebox[0pt]{
+\movie[
+  width=1.08\textwidth,
+  height=0.57\textwidth, 
+  showcontrols,
+  poster
+] 
+{\includegraphics[width=1.08\textwidth]{playbutton.pdf}}{loginOpen.mkv}
+}
+\end{center}
+\end{frame}
+
+%-------------------------------------
+
+\begin{frame}
+\frametitle{Generate and evaluate password}
+\begin{center}
+\vspace{-0.4cm}
+\makebox[0pt]{
+\movie[
+  width=1.03\textwidth,
+  height=0.72\textwidth, 
+  showcontrols,
+  poster
+] 
+{\includegraphics[width=1.03\textwidth]{playbutton2.pdf}}{add.mkv}
+}
+\end{center}
+
+\end{frame}
+
 
 
 %In this slide, some important text will be
@@ -221,6 +289,8 @@ The following open source libraries were used:
 %\end{columns}
 %\end{frame}
 %---------------------------------------------------------
+
+
 
 
 \end{document}
