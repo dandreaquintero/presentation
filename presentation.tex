@@ -290,7 +290,7 @@ The following open source libraries were used:
 \only<2->{
 \setlength{\leftmargini}{16pt}
 \footnotesize \color{black} 
- \begin{textblock}{4.9}(10,2.6)
+ \begin{textblock}{5}(10,2.2)
   \only<2>{
 	  \begin{itemize}
 	  \setlength\itemsep{-3pt}
@@ -303,10 +303,16 @@ The following open source libraries were used:
   \only<3>{
 	  \begin{itemize}
 	  \setlength\itemsep{-3pt}
-	  \item Login
-	  \item Encrypt Data
-	  \item Decrypt Data
-	  \item Digest (Sign) Data 
+%	  \item Login
+%	  \item Encrypt Data
+%	  \item Decrypt Data
+%	  \item Digest (Sign) Data 	  
+    \item Pin and Keys init.
+    \item Login \& Logout
+    \item Information retrieval
+    \item Encryption/decryption
+    \item Digest (Sign)
+    \item Key management 	  
 	  \end{itemize}
   }
   \only<4>{
@@ -357,6 +363,42 @@ The following open source libraries were used:
 \end{frame}
 
 \begin{frame}
+	\frametitle{Basics of Operation}
+	
+	\begin{itemize}
+	 \item<2-> At factory initialization, an admin/developer writes to the SEcube™ flash memory:
+	   \begin{itemize}
+	     \item<2-> Admin pin
+	     \item<2-> User pin
+	     \item<2-> User Keys (A single device can have multiple keys, and they can be used to share data with other SEcube™ users)
+	   \end{itemize}
+	 \item<3-> User logins with its pin and a challenge-based authentication.
+	 \item<4-> User chooses which of the keys to use to encrypt/decrypt.	  
+	\end{itemize}
+	
+\begin{alertblock}<5->{The data (passwords) can only be accessed if:}
+ \begin{itemize}
+       \setlength\itemsep{-3pt}
+	     \item<2-> SEcube™ device is connected
+	     \item<2-> Login pin is correct one
+	     \item<2-> Key inside the device is the correct one.
+	   \end{itemize}
+\end{alertblock}	
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{In-Memory and In-Disk DBs}
+  \begin{itemize}
+  \setlength\itemsep{10pt}
+    \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
+    \item<3-> \textbf{Save Wallet:} An In-disk encrypted secureSQLite DB is created and populated with the In-memory DB contents
+    \item<4-> \textbf{Open Wallet:} The selected In-disk DB is decrypted and its contents are dumped into an In-memory DB
+    \item<5-> \textbf{Delete Wallet:} Both the In-memory DB and the In-disk encrypted file are deleted.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
 	\frametitle{Windows and display elements}
 
   \begin{itemize}
@@ -379,16 +421,7 @@ The following open source libraries were used:
 	 \end{itemize}
 \end{frame}
 
-\begin{frame}
-	\frametitle{In-Memory and In-Disk DBs}
-  \begin{itemize}
-  \setlength\itemsep{10pt}
-    \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
-    \item<3-> \textbf{Save Wallet:} An In-disk encrypted secureSQLite DB is created and populated with the In-memory DB contents
-    \item<4-> \textbf{Open Wallet:} The selected In-disk DB is decrypted and its contents are dumped into an In-memory DB
-    \item<5-> \textbf{Delete Wallet:} Both the In-memory DB and the In-disk encrypted file are deleted.
-  \end{itemize}
-\end{frame}
+
 
 \begin{frame}
 	\frametitle{Data Display: Model/View architecture}
@@ -435,7 +468,6 @@ The following open source libraries were used:
 	\frametitle{Other functionalities}
 	
   \begin{itemize}
-    \item<2-> Security environment configuration (key and algorithm)
     \item<3-> Search for expired passwords.
     \item<4-> Launch entry domain.
     \item<5-> l33t converter.
