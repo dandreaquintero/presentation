@@ -41,6 +41,8 @@ Politecnico di Torino
 \titlegraphic{   \includegraphics[width=2cm]{logopolito}
    }
 
+
+
 %\logo{\includegraphics[height=1.5cm]{logo-polito}}
 
 %End of title page configuration block
@@ -54,15 +56,20 @@ Politecnico di Torino
 
 \AtBeginSection[]
 {
-  \begin{frame}
+{\setbeamertemplate{footline}{} 
+\begin{frame}[noframenumbering]
     \frametitle{Outline}
     \tableofcontents[currentsection]
   \end{frame}
+}
 }
 %------------------------------------------------------------
 
 
 \begin{document}
+
+
+
 
 %gets rid of bottom navigation bar and adds numbers in custom size and color
 \setbeamerfont{page number in head/foot}{size=\scriptsize}
@@ -72,8 +79,11 @@ Politecnico di Torino
 %gets rid of navigation symbols
 \setbeamertemplate{navigation symbols}{}
 
-%The next statement creates the title page.
-\frame{\titlepage}
+{\setbeamertemplate{footline}{} 
+\begin{frame}[noframenumbering]
+\titlepage
+\end{frame}
+} %this removes the footline from title page
 
 
 \begin{frame}
@@ -128,7 +138,10 @@ The need for a hardware-based password manager is justified answering these thre
 \begin{frame}
 \frametitle{Introduction}
 
+This work regards the implementation as a desktop application that exploits the capabilities of the SEcube™ (Secure Environment cube) hardware and software framework to store and protect passwords.
 
+\vspace{10pt}
+The desktop application, named \textbf{SEcubeWallet}, was written in C/C++and Qt, and it interacts with a SEcube™ device, requesting services like authentication and encryption/decryption of data.
 \end{frame}
 
 
@@ -306,6 +319,8 @@ The following open source libraries were used:
    }  
   
   \only<5>{
+    \vspace{5pt}
+    \hspace{5pt}\textbf{Applications}
   	\begin{itemize}
 	  \setlength\itemsep{-3pt}
 	  \item secureSQLiteBrowser
@@ -319,31 +334,122 @@ The following open source libraries were used:
 
 %---------------------------------------------------------------
 
-\section{Design}
+\section{Design and implementation}
 
 \begin{frame}
-\only<1>{\frametitle{SEcubeWallet Application}}
-\only<2>{\frametitle{Open device and authenticate}}
-\only<3>{\frametitle{Create In-memory Wallet}}
-\only<4>{\frametitle{Generate Password/Passphrase}}
-\only<5>{\frametitle{Evaluate Strength}}
-\only<6>{\frametitle{Encrypt and Save Wallet to disk}}
-\only<7>{\frametitle{General Architecture}}
-\begin{center}
-\includegraphics<1>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignOnly}
-\includegraphics<2>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignLog}
-\includegraphics<3>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignInMem}
-\includegraphics<4>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignGen}
-\includegraphics<5>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignZ}
-\includegraphics<6>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignDisk}
-\includegraphics<7>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesign}
-
-\end{center}
+	\only<1>{\frametitle{SEcubeWallet Application}}
+	\only<2>{\frametitle{Open device and authenticate}}
+	\only<3>{\frametitle{Create In-memory Wallet}}
+	\only<4>{\frametitle{Generate Password/Passphrase}}
+	\only<5>{\frametitle{Evaluate Strength}}
+	\only<6>{\frametitle{Encrypt and Save Wallet to disk}}
+	\only<7>{\frametitle{General Architecture}}
+	\begin{center}
+	\includegraphics<1>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignOnly}
+	\includegraphics<2>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignLog}
+	\includegraphics<3>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignInMem}
+	\includegraphics<4>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignGen}
+	\includegraphics<5>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignZ}
+	\includegraphics<6>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignDisk}
+	\includegraphics<7>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesign}
+	
+	\end{center}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Windows and display elements}
+
+  \begin{itemize}
+    \item<2-> Main Window
+      \begin{itemize}
+		    \item \textbf{\color{NavyBlue} Table View} for displaying the wallet entries
+		    \item \textbf{\color{NavyBlue} Filters} So the user can search in each of the table's columns.
+		    \item \textbf{\color{NavyBlue} Tool Bars} for Wallets, Tables and Entries.
+		    \item \textbf{\color{NavyBlue} Menu Bar} with all the actions.
+		    \item \textbf{\color{NavyBlue} Status Bar} used to display messages and the wallet's name
+      \end{itemize}
+      
+     \item<3-> Preference Window
+       \begin{itemize}
+	       \item Password Generators Configuration.
+	       \item zxcvbn Configuration.
+	     \end{itemize}
+     \item<4-> Help Window
+     \item<5-> Environment Window
+	 \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{In-Memory and In-Disk DBs}
+  \begin{itemize}
+  \setlength\itemsep{10pt}
+    \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
+    \item<3-> \textbf{Save Wallet:} An In-disk encrypted secureSQLite DB is created and populated with the In-memory DB contents
+    \item<4-> \textbf{Open Wallet:} The selected In-disk DB is decrypted and its contents are dumped into an In-memory DB
+    \item<5-> \textbf{Delete Wallet:} Both the In-memory DB and the In-disk encrypted file are deleted.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Data Display: Model/View architecture}
+
+  \begin{columns}
+   \column{0.4\textwidth}
+      \includegraphics<2->[width=1\columnwidth]{modelview.png}
+    \column{0.6\textwidth}	
+			\begin{itemize}
+			\setlength\itemsep{10pt}
+			
+			\item<3-> \textbf{Data:} Entries in a table from the In-memory DB.
+			\item<4-> \textbf{Model}: Wrapper for handling SQLite DBs easily. 
+			\item<5-> \textbf{Proxy Model}: Custom filtering for each column.
+			\item<6-> \textbf{View}: Data is displayed as a table.
+			\item<7-> \textbf{Delegate}: Used to Show/Hide the passwords.
+			\end{itemize}	
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{SW Libraries}
+	  \begin{block}<2->{zxcvbn: Password strength estimator}
+		\begin{itemize}
+			\item C/C++ open sources.
+			\item Included in the project as a \textbf{\color{NavyBlue} Dynamic Library}
+		\end{itemize}
+	\end{block}
+
+
+	\begin{block}<3->{PwGen: Pronounceable Passwords Generator}
+    Available as a Program, but instead the sources were directly included in the project.2
+  \end{block}
+
+	\begin{block}<4->{PassPhrase Generator}
+		\begin{itemize}
+		  \item Implemented as a C++/Qt function.
+		  \item Works by extracting Random words out of dictionary files (plain text).
+		\end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Other functionalities}
+	
+  \begin{itemize}
+    \item<2-> Security environment configuration (key and algorithm)
+    \item<3-> Search for expired passwords.
+    \item<4-> Launch entry domain.
+    \item<5-> l33t converter.
+  \end{itemize}  	
+	
+\end{frame}
+
+
 
 %-------------------------------------------
 
-\section{Demos}
+\section{Results}
+
+\subsection{Demos}
 \begin{frame}
 \frametitle{Login and Open a Wallet}
 \begin{center}
@@ -378,7 +484,61 @@ The following open source libraries were used:
 \end{frame}
 
 \section{Conclusions}
+\begin{frame}
+	\frametitle{Conclusions}
+	\begin{itemize}
+		\setlength\itemsep{10pt}
+		\item<1-> The SEcube™ is perfect for this type of application as it offers both reliability and simplicity to use.
+		\item<2-> In any password manager it is important to suggest random passwords and to check their strength
+		\item<3-> All the used libraries in this project are open source, proving it is possible to achieve a high level of security with the use of open software and hardware tools. 
+		\item<4-> The developed application still lacks some features in order to be considered a truly commercial product.
+	
+	\end{itemize}
+\end{frame}
 
 \section{Future Work}
+\begin{frame}
+	\frametitle{Future Work}
+	{
+	\setbeamercolor{block title}{use=structure,bg=MidnightBlue,          fg=white}
+	\setbeamercolor{block body} {use=structure,bg=MidnightBlue!10!white, fg=black,}
+  \fontsize{14pt}{14}\selectfont
+
+	
+  \vspace{-0.3cm}	
+	  
+	\begin{block}<2->{Web Browse Integration}
+  \setbeamercolor*{item}{fg=MidnightBlue}
+		\begin{itemize}
+		  \item Port the entire Application to a web browser complement.
+			\item Web browser complement that "talks" with the SEcubeWallet
+			\item Use keyboard emulation to Auto Fill forms
+		\end{itemize}
+	\end{block}
+
+	\vspace{-0.1cm}	
+
+	\begin{block}<3->{More than static passwords}
+	\setbeamercolor*{item}{fg=MidnightBlue}
+		\begin{itemize}
+			\item One Time Passwords
+			\item FIDO U2F
+		\end{itemize}
+	\end{block}
+	
+	\vspace{-0.1cm}	
+	
+	\begin{block}<4->{Android}
+	\setbeamercolor*{item}{fg=MidnightBlue}
+		\begin{itemize}
+			\item Use a SEcube™ phone device
+			\item Port SEcube™ host-side libraries to android
+			\item Port Qt application to android
+		\end{itemize}
+	\end{block}	
+	}
+	
+\end{frame}
+
 
 \end{document}
