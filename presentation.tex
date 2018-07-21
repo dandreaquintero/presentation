@@ -4,6 +4,7 @@
 \usepackage{cabin}
 \usepackage[absolute,overlay,showboxes]{textpos}
 \usepackage{multimedia}
+\usepackage{ragged2e}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -137,7 +138,6 @@ The need for a hardware-based password manager is justified answering these thre
 
 \begin{frame}
 \frametitle{Introduction}
-
 This work regards the implementation as a desktop application that exploits the capabilities of the SEcube™ (Secure Environment cube) hardware and software framework to store and protect passwords.
 
 \vspace{10pt}
@@ -342,6 +342,8 @@ The following open source libraries were used:
 
 \section{Design and implementation}
 
+\subsection{General Architecture}
+
 \begin{frame}
 	\only<1>{\frametitle{SEcubeWallet Application}}
 	\only<2>{\frametitle{Open device and authenticate}}
@@ -362,15 +364,19 @@ The following open source libraries were used:
 	\end{center}
 \end{frame}
 
+\subsection{Basics of Operation}
+
 \begin{frame}
 	\frametitle{Basics of Operation}
-	
+{\fontsize{13pt}{14}\selectfont	
 	\begin{itemize}
+	\setlength\itemsep{15pt}
 	 \item<2-> At factory initialization, an admin/developer writes to the SEcube™ flash memory:
 	   \begin{itemize}
-	     \item<2-> Admin pin
-	     \item<2-> User pin
-	     \item<2-> User Keys (A single device can have multiple keys, and they can be used to share data with other SEcube™ users)
+	   	
+	     \item<2-> {\fontsize{12pt}{14}\selectfont Admin pin}
+	     \item<2-> {\fontsize{12pt}{14}\selectfont User pin}
+	     \item<2-> {\fontsize{12pt}{14}\selectfont User Keys}
 	   \end{itemize}
 	 \item<3-> User logins with its pin and a challenge-based authentication.
 	 \item<4-> User chooses which of the keys to use to encrypt/decrypt.	  
@@ -378,13 +384,13 @@ The following open source libraries were used:
 	
 \begin{alertblock}<5->{The data (passwords) can only be accessed if:}
  \begin{itemize}
-       \setlength\itemsep{-3pt}
+       \setlength\itemsep{0pt}
 	     \item<2-> SEcube™ device is connected
 	     \item<2-> Login pin is the correct one
 	     \item<2-> Key inside the device is the correct one.
 	   \end{itemize}
 \end{alertblock}	
-	
+}	
 \end{frame}
 
 \begin{frame}
@@ -398,10 +404,13 @@ The following open source libraries were used:
   \end{itemize}
 \end{frame}
 
+\subsection{Implementation details}
+
 \begin{frame}
 	\frametitle{Windows and display elements}
 
   \begin{itemize}
+    \setlength\itemsep{10pt}
     \item<2-> Main Window
       \begin{itemize}
 		    \item \textbf{\color{NavyBlue} Table View} for displaying the wallet entries
@@ -483,9 +492,8 @@ The following open source libraries were used:
 
 %-------------------------------------------
 
-\section{Results}
+\section{Demos}
 
-\subsection{Demos}
 \begin{frame}
 \frametitle{Login and Open a Wallet}
 \begin{center}
