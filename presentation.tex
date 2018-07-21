@@ -5,6 +5,8 @@
 \usepackage[absolute,overlay,showboxes]{textpos}
 \usepackage{multimedia}
 \usepackage{ragged2e}
+\usepackage{appendixnumberbeamer}
+
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -19,6 +21,7 @@
 %\setbeamertemplate{subsection in toc}{\hspace*{2em}\inserttocsubsection}
 \setlength{\leftmargini}{10pt}
 \setbeamertemplate{blocks}[rounded][shadow=false]
+
 
 %------------------------------------------------------------
 %This block of code defines the information to appear in the
@@ -583,6 +586,316 @@ The following open source libraries were used:
 	}
 	
 \end{frame}
+
+%%%%%%%%%% backup slides %%%%%%%%%%
+
+\appendix
+
+\section*{SEfile}
+\begin{frame}
+	\frametitle{SEfile}
+	
+	A secured file has the structure shown in figure. The data is divided in sectors, and each of them is encrypted and signed. The first sector (header) contains metadata.
+	
+	When a portion of the file wants to be read or written, it is not necessary to process the whole file. Only the required sectors are manipulated.
+	
+	\includegraphics[width=1\columnwidth]{secfile}	
+
+\end{frame}
+
+\section*{Algorithms}
+
+\begin{frame}
+	\frametitle{Algorithms}
+	
+	\textbf{Encryption}: Advanced Encryption Standard (AES), established by the U.S. National Institute of Standards and Technology (NIST). For each data sector {\color{NavyBlue} AES-256-CTR} is used, while the header sector is encrypted using {\color{NavyBlue}AES-256-ECB}.
+	
+	\vspace{7pt}
+	
+	\textbf{Authentication} Each sector, including the header, is signed using {\color{NavyBlue} SHA-256-HMAC}, meaning that the signature depends on both the data contained in the sector itself and on a chosen encryption key. 
+	
+	\vspace{7pt}
+	
+	To use two different keys to encrypt data and to digest authentication. SEfile leverages on the pbkdf2()
+\end{frame}
+
+\section*{secureSQLite}
+
+\begin{frame}
+	\frametitle{secureSQLite}
+	
+	Based on the {\color{NavyBlue} SQLite} and {\color{NavyBlue} SEfile}, this API allows the user to create SEcube™ secured data bases.
+	
+	\vspace{7pt}
+	
+  The SQLite system has been modified to use a wrapper based on SEfile, rather than using directly the OS calls. The development is based on a template for making a custom {\color{NavyBlue} VFS} interface distributed along with SQLite.
+
+\vspace{7pt}
+
+Every database created with secureSQLite is cyphered and signed, thus making it impossible to read the database contents without the SEcube™.
+\end{frame}
+
+\section*{DevBoard}
+
+\begin{frame}
+	\frametitle{Development Board}
+	
+	\begin{columns}
+    \column{0.5\textwidth}
+			\begin{description}
+				\setlength\itemsep{-3pt}
+				\fontsize{11pt}{14}\selectfont
+				\item  [J1000] USB 2.0 to UART 
+				\item [J2000]  Ethernet 10/100 
+				\item [J4000]  FPGA and CPU GPIOs
+				\item [J4001]  JTAG
+				\item [J4002]  microSD card 
+			\end{description}    
+    
+      \includegraphics[width=\columnwidth]{devboard_sch}
+    \column{0.5\textwidth}
+			\begin{description}
+			\fontsize{11pt}{14}\selectfont
+				\setlength\itemsep{-3pt}
+				\item [J4004]  FPGA and CPU GPIOs
+				\item [J5000]  USB 2.0 High Speed 
+				\item [LEDx]   Leds 
+				\item [SWx00y]  Switches 
+			\end{description}       
+    
+      \includegraphics[width=\columnwidth]{devboard}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{JTAG Connections}
+	
+To program and debug the chip, we use an \textbf{{\color{NavyBlue}ST-Link/V2}} which communicates with the MCU using the JTAG/SWD connection in the DevKit board.
+
+  \begin{columns}
+    \column{0.5\textwidth}  
+      \includegraphics[width=\textwidth]{conSche}
+    \column{0.5\textwidth}  
+      \includegraphics[width=\textwidth]{conReal2}
+  \end{columns}
+\end{frame}
+
+\section*{USEcube}
+
+\begin{frame}
+	\frametitle{The USEcube™ Stick}
+  \begin{itemize}
+      \setlength\itemsep{-1pt}  
+		  \fontsize{12pt}{14}\selectfont
+				
+				\item {\color{NavyBlue} SEcube™ chip + USB 2.0 High-Speed + SDcard socket.}
+				\item Compatible with any Operating System, and no need for drivers.
+				\item Separation of encrypted data from the encryptor/decryptor. 				
+				\item microSD can be changed to adjust size and speed.
+				\item Dust and water-resistant
+				\item No JTAG interface. To inject firmware, secure bootloader.
+	  \end{itemize}
+	
+ 	\begin{columns}
+    \column{0.5\textwidth}
+      \includegraphics[width=\columnwidth]{usb.png}
+    \column{0.5\textwidth}
+      \includegraphics[width=\columnwidth]{usb_sch.png}
+   \end{columns}
+\end{frame}
+
+\section*{YubiKey}
+
+\begin{frame}
+	\frametitle{YubiKey}
+	
+  {\fontsize{11pt}{14}\selectfont
+	Family of hardware authentication devices developed by Yubico 
+	Unfortunately, not open source.
+	
+	Supports Google Accounts, Facebook Accounts, GitHub, Dropbox
+  }
+  
+  \begin{columns}
+  \column{0.5\textwidth}
+		\begin{itemize}
+		\setlength\itemsep{-3pt}
+	  \fontsize{11pt}{14}\selectfont	
+			\item Static Passwords
+			\item Yubico One-Time Password (OTP)
+			\item OATH – HOTP (EVENT)
+			\item OATH – TOTP (TIME)
+	  \end{itemize} 
+	  
+  \column{0.5\textwidth}	  
+  \begin{itemize}
+	  \setlength\itemsep{-3pt}
+	  \fontsize{11pt}{14}\selectfont	
+			\item Challenge and Response (HMAC-SHA1, Yubico OTP)
+			\item PIV-Compatible Smart Card: 	
+			\item OpenPGP
+			\item FIDO U2F
+	  \end{itemize} 
+	  
+	\end{columns}
+  \centering	
+	  \includegraphics[width=0.8\columnwidth]{yubikeyfam.jpg}
+
+	
+\end{frame}
+
+\section*{Mooltipass}
+
+\begin{frame}
+	\frametitle{Mooltipass: A Simple Offline Password Keeper}
+  \fontsize{11pt}{14}\selectfont	
+		\onslide<1->{The Mooltipass emulates a standard USB keyboard, 
+		The Mooltipass has an internal flash in which the user encrypted credentials are stored, while a PIN-locked smartcard contains the AES-256bits key required for their decryption.
+		Open software and open hardware, kickstarter campaign.}
+
+ \begin{columns}
+    \column{0.5\textwidth} 
+			\begin{itemize}
+				\setlength\itemsep{-3pt}
+				\fontsize{11pt}{14}\selectfont	
+				\item<2-> Plugin the Mooltipass, no driver required.
+				\item<3-> Insert the smartcard and unlock it with the PIN
+				\item<4-> If using the browser plugin, the Mooltipass asks permission to send the stored credentials, or asks you to save new ones
+				\item<5-> If not using the browser plugin Mooltipass can type credentials like a keyboard.
+			\end{itemize}
+
+  \column{0.5\textwidth}
+		\begin{itemize}
+			\setlength\itemsep{-3pt}
+			\fontsize{11pt}{14}\selectfont	
+			
+			\item<6-> \textbf{ST662ACD-TR:} Power
+			\item<6-> \textbf{ATMEGA32U4:} MCU
+			\item<6-> \textbf{AT88SC102:} Smart Card
+			\item<6-> \textbf{AT45DB011D-SSH-T:} Flash
+		\end{itemize}
+		
+		\includegraphics<6->[width=\columnwidth]{mooltipass.jpg}
+
+  \end{columns}
+\end{frame}
+
+\section*{pwgen ex}
+
+\begin{frame}
+	\frametitle{PwGen Examples}
+
+  \begin{columns}
+	\column{0.5\textwidth}
+    \texttt{-s}:	Random\\
+    \texttt{-y}: Symbols\\
+    \texttt{-v}: No vowels
+  \column{0.5\textwidth}
+    \texttt{-B}: No ambiguous\\
+    \texttt{-A}: No capital\\
+    \texttt{-0}: No numerals
+	
+	\end{columns}
+	\begin{table}
+		\begin{tabular}{c|c|c|r}
+		\textbf{Password} & \textbf{Length} & \textbf{Options} & \textbf{Log Entropy}  \\ 
+		\hline
+		\hline
+		
+		\texttt{iesohGhai3}   & 10 & \texttt{-}    &  9.75 (Level 3)\\
+		\texttt{ees0cooLo2}   & 10 & \texttt{-}    & 10.47 (Level 4)\\
+		\texttt{dX042wKqlW}   & 10 & \texttt{-s}   & 17.86 (Level 4)\\
+		\texttt{@!,Q*l5\}+H } & 10 & \texttt{-ys}  & 18.15 (Level 4)\\
+		\texttt{TBw4)9}       &  6 & \texttt{-ys}  & 11.62 (Level 4)\\
+		\texttt{B7t34Lck}     &  8 & \texttt{-v}   & 11.87 (Level 4)\\
+		\texttt{nofosootei}   & 10 & \texttt{-BA0} &  6.50 (Level 2)\\
+		\end{tabular}
+  \end{table}
+
+\end{frame}
+
+\section*{passgen ex}
+
+\begin{frame}
+	\frametitle{PassPhrase Generator examples}
+  	  \fontsize{11pt}{14}\selectfont	
+	
+	  \resizebox{\linewidth}{!}{% Resize table to fit within \linewidth horizontally
+\begin{tabular}{c|c|c|c|r}
+\textbf{PassPhrase} & \textbf{wor} & \textbf{len} & \textbf{uncom}  & \textbf{Log Entr} \\ 
+\hline
+\hline
+		 {\color{NavyBlue}C}occhio & 1 & - & - & 4.27 (L1) \\ 
+		 
+		 {\color{NavyBlue}L}egitimately & 1 & 8 & - & 4.55 (L1) \\
+     
+     {\color{NavyBlue}W}oodhaven		& 1 & 8 & 30\% & 4.94 (L1) \\
+     \hline    
+     {\color{NavyBlue}S}horeline{\color{NavyBlue}C}ech & 2 & - & - & 9.18 (L3) \\
+     
+     {\color{NavyBlue}M}ongolia{\color{NavyBlue}S}impsons & 2 & 8 & -    & 7.30 (L2) \\
+     {\color{NavyBlue}M}cinnis{\color{NavyBlue}P}haya     & 2 & - & 30\% & 9.14 (L3) \\
+
+     {\color{NavyBlue}Z}ucchini{\color{NavyBlue}S}alamandra & 2 & 8 & 30\% & 9.19 (L3) \\
+     {\color{NavyBlue}S}acchetti{\color{NavyBlue}V}igevano  & 2 & 8 & 30\% & 9.11 (L3) \\
+
+     {\color{NavyBlue}D}rammaturgico{\color{NavyBlue}S}batacchiare  & 2 & 12 & - & 8.98 (L3) \\
+     {\color{NavyBlue}M}alformations{\color{NavyBlue}A}strophysical & 2 & 12 & - & 9.60 (L3) \\
+     \hline
+     {\color{NavyBlue}L}atina{\color{NavyBlue}I}nterchange{\color{NavyBlue}F}bo & 3 & - & - & 13.5  (L4) \\
+     {\color{NavyBlue}O}sa{\color{NavyBlue}A}yman{\color{NavyBlue}C}antinflas   & 3 & - & - & 12.98 (L4) \\
+     {\color{NavyBlue}I}mmobile{\color{NavyBlue}C}w{\color{NavyBlue}S}ites      & 3 & - & - & 11.43 (L4) \\
+     
+     {\color{NavyBlue}R}immel{\color{NavyBlue}B}rag{\color{NavyBlue}F}aenza     & 3 & - & 30\% & 13.49 (L4) \\
+     
+     {\color{NavyBlue}R}eclining{\color{NavyBlue}C}anberra{\color{NavyBlue}E}cuadorian         & 3 & 8 &  -   & 13.69 (L4) \\
+     
+     {\color{NavyBlue}I}naspettato{\color{NavyBlue}R}othschilds{\color{NavyBlue}D}isconcerting & 3 & 8 & 30\% & 14.48 (L4) \\
+
+\end{tabular}}	
+\end{frame}
+
+\section*{other contributions}
+
+\begin{frame}
+		\frametitle{Other contributions}
+	Besides the application development, other results obtained during this work are:
+	\begin{itemize}
+	\setlength\itemsep{10pt}
+		\item The implementation of an improved Login behaviour in the SEcube™ framework, that renders more usable SEcubeWallet and any other application that uses the SEcube™ authentication system.
+		
+		\item The discovery and fix of a bug in the SEfile library that did not allow to use the secureSQLite library in a FAT32 file system.
+	\end{itemize}
+		
+\end{frame}
+
+\section*{SEkey}
+
+\begin{frame}
+	\frametitle{SEkey: key management for SEcube™}
+		  \fontsize{12pt}{14}\selectfont	
+
+	
+	SEkey is a new library currently under development by 	Mateus Françani as his master thesis work. The library will sit next to SEfile and SElink.
+	
+	\begin{columns}
+	  \column{0.5\textwidth}
+	    
+	    Right now keys inside a SEcube™ chip can only be modified at factory reset. This is not very useful in a working environment, as the purpose of having multiple keys is to allow users to share information with selected people. 
+	    
+	\vspace{7pt}
+	
+	The job of the SEkey library will be to allow an admin to dynamically add and remove keys to SEcube™ devices.
+	
+	    \column{0.5\textwidth}  
+	      \includegraphics[width=\columnwidth]{sekey.png}
+	  
+	\end{columns}  
+
+\end{frame}
+
+
+
 
 
 \end{document}
