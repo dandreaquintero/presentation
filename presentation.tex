@@ -141,7 +141,7 @@ The need for a hardware-based password manager is justified answering these thre
 
 \begin{frame}
 \frametitle{Introduction}
-This work regards the implementation as a desktop application that exploits the capabilities of the SEcube™ (Secure Environment cube) hardware and software framework to store and protect passwords.
+Exploit the capabilities of the SEcube™ (Secure Environment cube) hardware and software framework to store and protect a set of passwords (Wallet).
 
 \vspace{10pt}
 The desktop application, named \textbf{SEcubeWallet}, was written in C/C++and Qt, and it interacts with a SEcube™ device, requesting services like authentication and encryption/decryption of data.
@@ -162,8 +162,8 @@ The following open source libraries were used:
 \setbeamercolor{block title}{use=structure,bg=MidnightBlue,      fg=white}
 \setbeamercolor{block body} {use=structure,bg=MidnightBlue!10!white, fg=black,}
 
-\begin{block}<2->{Qt: GUI and wrappers}
-\onslide<3-> {C++ library, cross-platform, elegant design}
+\begin{block}<2->{Qt: Graphical User Interface}
+\onslide<3-> {C++ library, cross-platform, variety of display elements}
 \end{block}
 
 \begin{block}<4->{SQLite: DataBase management}
@@ -345,6 +345,36 @@ The following open source libraries were used:
 
 \section{Design and implementation}
 
+\subsection{Basic SEcube™ Operation}
+
+\begin{frame}
+	\frametitle{Basic SEcube™ Operation}
+{\fontsize{13pt}{14}\selectfont	
+	\begin{itemize}
+	\setlength\itemsep{10pt}
+	 \item<2-> At factory initialization, an admin/developer writes to the SEcube™ flash memory:
+	   \begin{itemize}
+	   	
+	     \item<2-> {\fontsize{12pt}{14}\selectfont Admin pin}
+	     \item<2-> {\fontsize{12pt}{14}\selectfont User pin}
+	     \item<2-> {\fontsize{12pt}{14}\selectfont User Keys}
+	   \end{itemize}
+	 \item<3-> User logins with its pin and a challenge-based authentication.
+	 \item<4-> User chooses which of the keys to use to encrypt/decrypt.	  
+	 \item<5-> The user request encryption/decryption to the device.
+	\end{itemize}
+	
+\begin{alertblock}<6->{The data (passwords) can only be accessed if:}
+ \begin{itemize}
+       \setlength\itemsep{0pt}
+	     \item<2-> SEcube™ device is connected
+	     \item<2-> Login pin is the correct one
+	     \item<2-> Key inside the device is the correct one.
+	   \end{itemize}
+\end{alertblock}	
+}	
+\end{frame}
+
 \subsection{General Architecture}
 
 \begin{frame}
@@ -367,37 +397,12 @@ The following open source libraries were used:
 	\end{center}
 \end{frame}
 
-\subsection{Basics of Operation}
 
-\begin{frame}
-	\frametitle{Basics of Operation}
-{\fontsize{13pt}{14}\selectfont	
-	\begin{itemize}
-	\setlength\itemsep{15pt}
-	 \item<2-> At factory initialization, an admin/developer writes to the SEcube™ flash memory:
-	   \begin{itemize}
-	   	
-	     \item<2-> {\fontsize{12pt}{14}\selectfont Admin pin}
-	     \item<2-> {\fontsize{12pt}{14}\selectfont User pin}
-	     \item<2-> {\fontsize{12pt}{14}\selectfont User Keys}
-	   \end{itemize}
-	 \item<3-> User logins with its pin and a challenge-based authentication.
-	 \item<4-> User chooses which of the keys to use to encrypt/decrypt.	  
-	\end{itemize}
-	
-\begin{alertblock}<5->{The data (passwords) can only be accessed if:}
- \begin{itemize}
-       \setlength\itemsep{0pt}
-	     \item<2-> SEcube™ device is connected
-	     \item<2-> Login pin is the correct one
-	     \item<2-> Key inside the device is the correct one.
-	   \end{itemize}
-\end{alertblock}	
-}	
-\end{frame}
 
 \begin{frame}
 	\frametitle{In-Memory and In-Disk DBs}
+  We want to achieve both	 security and efficiency:
+	
   \begin{itemize}
   \setlength\itemsep{10pt}
     \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
@@ -414,22 +419,30 @@ The following open source libraries were used:
 
   \begin{itemize}
     \setlength\itemsep{10pt}
-    \item<2-> Main Window
+    \item<1-> Main Window
       \begin{itemize}
-		    \item \textbf{\color{NavyBlue} Table View} for displaying the wallet entries
-		    \item \textbf{\color{NavyBlue} Filters} So the user can search in each of the table's columns.
-		    \item \textbf{\color{NavyBlue} Tool Bars} for Wallets, Tables and Entries.
-		    \item \textbf{\color{NavyBlue} Menu Bar} with all the actions.
-		    \item \textbf{\color{NavyBlue} Status Bar} used to display messages and the wallet's name
+		    \item<2-> \textbf{\color{NavyBlue} Table View:} for displaying the wallet entries
+	\begin{table}
+		\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Username} & \textbf{Domain} & \textbf{Password} & \textbf{Date} &\textbf{Description}  \\ 
+		\hline
+		\end{tabular}
+		\end{table}
+				    
+		    
+		    \item<3-> \textbf{\color{NavyBlue} Filters:} So the user can search in each of the table's columns.
+		    \item<4-> \textbf{\color{NavyBlue} Tool Bars:} Open Wallet, Save Wallet, Add entry etc.
+		    \item<5-> \textbf{\color{NavyBlue} Status Bar:} Used to display messages and the wallet's name
       \end{itemize}
       
-     \item<3-> Preference Window
+     \item<6-> Preference Window
        \begin{itemize}
 	       \item Password Generators Configuration.
 	       \item zxcvbn Configuration.
 	     \end{itemize}
-     \item<4-> Help Window
-     \item<5-> Environment Window
+     \item<7-> Help Window
+     \item<8-> Environment Window
 	 \end{itemize}
 \end{frame}
 
@@ -461,13 +474,14 @@ The following open source libraries were used:
 		\begin{itemize}
 		\setlength\itemsep{0pt}
 			\item C/C++ open sources.
+			\item Huge dictionary files need to be compiled into the sources
 			\item Included in the project as a \textbf{\color{NavyBlue} Dynamic Library}
 		\end{itemize}
 	\end{block}
 
 
 	\begin{block}<3->{PwGen: Pronounceable Passwords Generator}
-    The sources were modified (simplified) and included in the application.
+    The sources were slightly simplified and included in the application.
   \end{block}
 
 
@@ -485,11 +499,13 @@ The following open source libraries were used:
   \begin{itemize}
   	\setlength\itemsep{25pt}
     \item<2-> \textbf{Search for expired passwords} \\
-    Using date's column custom filter
-    \item<3-> \textbf{Launch entry's domain} \\
-    In default OS web browser
-    \item<4-> \textbf{l33t converter} \\
+    Using custom filter for the date column 
+
+    \item<3-> \textbf{l33t converter} \\
     From {\color{NavyBlue} PenicuikCiting} to {\color{NavyBlue} 9en1cu1kC1t1ng}.
+
+    \item<4-> \textbf{Launch entry's domain} \\
+    In default OS web browser
 
   \end{itemize}  	
 	
@@ -561,8 +577,7 @@ The following open source libraries were used:
 	\begin{block}<2->{Web Browse Integration}
   \setbeamercolor*{item}{fg=MidnightBlue}
 		\begin{itemize}
-		  \item Port the entire Application to a web browser complement.
-			\item Web browser complement that "talks" with the SEcubeWallet
+		  \item Develop a web browser complement.
 			\item Use keyboard emulation to Auto Fill forms
 		\end{itemize}
 	\end{block}
@@ -572,8 +587,8 @@ The following open source libraries were used:
 	\begin{block}<3->{More than static passwords}
 	\setbeamercolor*{item}{fg=MidnightBlue}
 		\begin{itemize}
-			\item One Time Passwords
-			\item FIDO U2F
+			\item OTP (One Time Passwords)
+			\item U2F (Universal second factor)
 		\end{itemize}
 	\end{block}
 	
