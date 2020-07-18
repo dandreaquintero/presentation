@@ -6,7 +6,10 @@
 \usepackage{multimedia}
 \usepackage{ragged2e}
 \usepackage{appendixnumberbeamer}
-
+\usepackage{verbatim}
+\usepackage{smartdiagram}
+\usepackage{metalogo}
+%\usepackage{dtklogos}
 
 \usetheme{Madrid}
 \usecolortheme{default}
@@ -26,21 +29,23 @@
 %------------------------------------------------------------
 %This block of code defines the information to appear in the
 %Title page
+\setbeamerfont{title}{size=\normalsize}
 \title[About Beamer] %optional
-{A Secure Password Wallet based on the SEcube™ framework}
+{Changes in Extreme Precipitation and Temperature Indices over two Alpine Regions using CMIP5 Climate Models}
 
 
 \author % (optional)
-{Walter Gallego Gómez}
+{Daniela Andrea Quintero Garcia}
 
 \institute[VFU] % (optional)
 {
- Department of control and computer engineering\\
+Department of Environment, Land and Infrastructure Engineering	
+\\
 Politecnico di Torino
 }
 
-\date[VLC 2014] % (optional)
-{July 23, 2018}
+\date[VLC 2014 ] % (optional)
+{\scriptsize July 22, 2020}
 
 \titlegraphic{   \includegraphics[width=2cm]{logopolito}
    }
@@ -140,215 +145,250 @@ The need for a hardware-based password manager is justified answering these thre
 
 
 \begin{frame}
-\frametitle{Introduction}
-Exploit the capabilities of the SEcube™ (Secure Environment cube) hardware and software framework to store and protect a set of passwords (Wallet).
+\frametitle{Introduzione}
+Studiare gli eventi estremi è di grande importanza per sviluppare meglio la gestione del rischio di disastri, ridurre l'esposizione e la vulnerabilità della società. 
 
 \vspace{10pt}
-The desktop application, named \textbf{SEcubeWallet}, was written in C/C++and Qt, and it interacts with a SEcube™ device, requesting services like authentication and encryption/decryption of data.
+Questa tesi studia i cambiamenti dei modelli climatici CMIP5 applicando gli indici climatici ETCCDI per le precipitazioni e la temperatura in due aree alpine.
 \end{frame}
 
 
 
-\section{Technologies used}
-
-\subsection{Software libraries}
-%---------------------------------------------------------
-%Highlighting text
-\begin{frame}
-\frametitle{Software Libraries}
-
-The following open source libraries were used:
-{
-\setbeamercolor{block title}{use=structure,bg=MidnightBlue,      fg=white}
-\setbeamercolor{block body} {use=structure,bg=MidnightBlue!10!white, fg=black,}
-
-\begin{block}<2->{Qt: Graphical User Interface}
-\onslide<3-> {C++ library, cross-platform, variety of display elements}
-\end{block}
-
-\begin{block}<4->{SQLite: DataBase management}
-\onslide<5-> {Self-contained, written in C, Transactional}
-\end{block}
-
-\begin{block}<6->{PwGen: Password generator}
-\onslide<7-> {Configurable, random or readable}
-\end{block}
-
-\begin{block}<8->{zxcvbn: Password strength estimator}
-\onslide<9-> {Dictionaries, keyboard patterns, sequences, years}
-\end{block}
-}
-\end{frame}
+%\section{CMIP5 Models}
+%
+%\subsection{Software utilizzato}
+%%---------------------------------------------------------
+%%Highlighting text
+%\begin{frame}
+%\frametitle{Software Libraries}
+%
+%The following open source libraries were used:
+%{
+%\setbeamercolor{block title}{use=structure,bg=MidnightBlue,      fg=white}
+%\setbeamercolor{block body} {use=structure,bg=MidnightBlue!10!white, fg=black,}
+%
+%\begin{block}<2->{Qt: Graphical User Interface}
+%\onslide<3-> {C++ library, cross-platform, variety of display elements}
+%\end{block}
+%
+%\begin{block}<4->{SQLite: DataBase management}
+%\onslide<5-> {Self-contained, written in C, Transactional}
+%\end{block}
+%
+%\begin{block}<6->{PwGen: Password generator}
+%\onslide<7-> {Configurable, random or readable}
+%\end{block}
+%
+%\begin{block}<8->{zxcvbn: Password strength estimator}
+%\onslide<9-> {Dictionaries, keyboard patterns, sequences, years}
+%\end{block}
+%}
+%\end{frame}
 
 % ----------------------------------
 
-\subsection{The SEcube™ Framework}
+%\subsection{Command Data Operator (CDO)}
 
-\begin{frame}
-  \frametitle{The SEcube™ Open Security Platform}
-  \vspace{-0.3cm}
+%\begin{frame}
+%  \frametitle{The SEcube™ Open Security Platform}
+%  \vspace{-0.3cm}
+%
+%  \begin{columns}
+%    \column{0.5\textwidth}
+%	    \minipage[t][\textheight][t]{\columnwidth}
+%	    {\setbeamertemplate{blocks}[rounded][shadow=false]
+%	    \setbeamercolor{block title}{use=structure,bg=PineGreen, fg=white}
+%	    \setbeamercolor{block body} {use=structure,bg=white,     fg=black}
+%	    
+%	    \begin{block}{Hardware}
+%	      {\fontsize{14pt}{14}\selectfont
+%				\setbeamertemplate{blocks}[rounded][shadow=false]
+%				\setbeamercolor{block body} {use=structure,bg=PineGreen!10!white, fg=black,}
+%				\setbeamercolor*{item}{fg=PineGreen}
+%				\vspace{-0.3cm}
+%				
+%				\begin{block}<2->{}
+%	  			{Developed by the Blu5 Group}
+%				\end{block}
+%				
+%				\vspace{-0.2cm}
+%		
+%				\begin{block}<3->{}
+%				{
+%					\textbf{Family}
+%					\begin{itemize}
+%						\item SEcube™ Chip
+%						\item SEcube™ DevKit
+%						\item USEcube™ Stick
+%					\end{itemize}
+%				}
+%				\end{block}
+%				
+%				\vspace{-0.2cm}
+%				
+%				\begin{block}<4->{}
+%				{
+%					\textbf{SEcube™ Chip}
+%					\begin{itemize}
+%						\item \textbf{\color{PineGreen} MCU:} STM32F4 (STM)
+%						\item \textbf{\color{PineGreen} FPGA:} MachXO2-7000 (Lattice)
+%						\item \textbf{\color{PineGreen} Smart Card:} SLJ52G (infineon)
+%					\end{itemize}
+%				}
+%				\end{block}
+%			  }
+%	    \end{block}
+%	    }
+%	  \endminipage
+%  \column{0.5\textwidth}
+%	  \minipage[t][\textheight][t]{\columnwidth}
+%	  {\setbeamertemplate{blocks}[rounded][shadow=false]
+%	  \setbeamercolor{block title}{use=structure,bg=Red!90!Black,fg=white}
+%	  \setbeamercolor{block body} {use=structure,bg=white,       fg=black}
+%  	\begin{block}{Software}
+%	      {\fontsize{14pt}{14}\selectfont
+%				\setbeamertemplate{blocks}[rounded][shadow=false]
+%				\setbeamercolor{block body} {use=structure,bg=Red!10!white, fg=black,}
+%				\setbeamercolor*{item}{fg=Red}
+%				\vspace{-0.3cm}
+%				
+%				\begin{block}<5->{}
+%  			  Developed by European research institutions. \\
+%  			  Written in C using the Eclipse IDE. 
+%	  			
+%				\end{block}
+%								\vspace{-0.2cm}
+%
+%				\begin{block}<6->{}
+%				   \textbf{Firmware:}
+%				   Developers can customize the firmware to their needs, and load the updated version to the SEcube™ chip.
+%				\end{block}				
+%								\vspace{-0.2cm}
+%
+%				\begin{block}<7>{}
+%				  \textbf{Host libraries:}
+%           Allow to experience the platform as a high-security black box.
+%				\end{block}
+%				
+%		}		
+%	  \end{block}
+%	  }
+%	  \endminipage      
+%  
+%  \end{columns}
+%\end{frame}
+%
+%
+%\begin{frame}
+%\frametitle{SEcube™ APIs hierarchy}
+%\setlength{\TPboxrulesize}{1pt}
+%%\TPMargin{0pt}
+%\textblockrulecolour{red!70!black}
+%%\textblockrulecolour{white}
+%\textblockcolour{red!10!white}
+%\setbeamercolor*{item}{fg=red!70!black}
+%
+%\begin{center}
+%\includegraphics<1>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsHW}
+%\includegraphics<2>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL0}
+%\includegraphics<3>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL1}
+%\includegraphics<4>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL2}
+%\includegraphics<5>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levels}
+%\end{center}
+%
+%\only<2->{
+%\setlength{\leftmargini}{16pt}
+%\footnotesize \color{black} 
+% \begin{textblock}{5}(10,2.2)
+%  \only<2>{
+%	  \begin{itemize}
+%	  \setlength\itemsep{-3pt}
+%	   \item Discover Devices 
+%	   \item Open Connection 
+%	   \item TX RX Data 
+%	   \item Close Connection
+%	  \end{itemize}
+%  }
+%  \only<3>{
+%	  \begin{itemize}
+%	  \setlength\itemsep{-3pt}
+%%	  \item Login
+%%	  \item Encrypt Data
+%%	  \item Decrypt Data
+%%	  \item Digest (Sign) Data 	  
+%    \item Pin and Keys init.
+%    \item Login \& Logout
+%    \item Information retrieval
+%    \item Encryption/decryption
+%    \item Digest (Sign)
+%    \item Key management 	  
+%	  \end{itemize}
+%  }
+%  \only<4>{
+%	  \begin{itemize}
+%	  \setlength\itemsep{-3pt}
+%	  \item SEfile
+%	  \item secureSQLite
+%	  \item SElink
+%	  \end{itemize}
+%   }  
+%  
+%  \only<5>{
+%    \vspace{5pt}
+%    \hspace{5pt}\textbf{Applications}
+%  	\begin{itemize}
+%	  \setlength\itemsep{-3pt}
+%	  \item secureSQLiteBrowser
+%	  \item \textbf{\color{red!70!black} SEcubeWallet}
+%	  \end{itemize}
+%	  }
+% \end{textblock}
+%}
+%
+%\end{frame}
 
-  \begin{columns}
-    \column{0.5\textwidth}
-	    \minipage[t][\textheight][t]{\columnwidth}
-	    {\setbeamertemplate{blocks}[rounded][shadow=false]
-	    \setbeamercolor{block title}{use=structure,bg=PineGreen, fg=white}
-	    \setbeamercolor{block body} {use=structure,bg=white,     fg=black}
-	    
-	    \begin{block}{Hardware}
-	      {\fontsize{14pt}{14}\selectfont
-				\setbeamertemplate{blocks}[rounded][shadow=false]
-				\setbeamercolor{block body} {use=structure,bg=PineGreen!10!white, fg=black,}
-				\setbeamercolor*{item}{fg=PineGreen}
-				\vspace{-0.3cm}
-				
-				\begin{block}<2->{}
-	  			{Developed by the Blu5 Group}
-				\end{block}
-				
-				\vspace{-0.2cm}
-		
-				\begin{block}<3->{}
-				{
-					\textbf{Family}
-					\begin{itemize}
-						\item SEcube™ Chip
-						\item SEcube™ DevKit
-						\item USEcube™ Stick
-					\end{itemize}
-				}
-				\end{block}
-				
-				\vspace{-0.2cm}
-				
-				\begin{block}<4->{}
-				{
-					\textbf{SEcube™ Chip}
-					\begin{itemize}
-						\item \textbf{\color{PineGreen} MCU:} STM32F4 (STM)
-						\item \textbf{\color{PineGreen} FPGA:} MachXO2-7000 (Lattice)
-						\item \textbf{\color{PineGreen} Smart Card:} SLJ52G (infineon)
-					\end{itemize}
-				}
-				\end{block}
-			  }
-	    \end{block}
-	    }
-	  \endminipage
-  \column{0.5\textwidth}
-	  \minipage[t][\textheight][t]{\columnwidth}
-	  {\setbeamertemplate{blocks}[rounded][shadow=false]
-	  \setbeamercolor{block title}{use=structure,bg=Red!90!Black,fg=white}
-	  \setbeamercolor{block body} {use=structure,bg=white,       fg=black}
-  	\begin{block}{Software}
-	      {\fontsize{14pt}{14}\selectfont
-				\setbeamertemplate{blocks}[rounded][shadow=false]
-				\setbeamercolor{block body} {use=structure,bg=Red!10!white, fg=black,}
-				\setbeamercolor*{item}{fg=Red}
-				\vspace{-0.3cm}
-				
-				\begin{block}<5->{}
-  			  Developed by European research institutions. \\
-  			  Written in C using the Eclipse IDE. 
-	  			
-				\end{block}
-								\vspace{-0.2cm}
-
-				\begin{block}<6->{}
-				   \textbf{Firmware:}
-				   Developers can customize the firmware to their needs, and load the updated version to the SEcube™ chip.
-				\end{block}				
-								\vspace{-0.2cm}
-
-				\begin{block}<7>{}
-				  \textbf{Host libraries:}
-           Allow to experience the platform as a high-security black box.
-				\end{block}
-				
-		}		
-	  \end{block}
-	  }
-	  \endminipage      
-  
-  \end{columns}
-\end{frame}
-
-\begin{frame}
-\frametitle{SEcube™ APIs hierarchy}
-\setlength{\TPboxrulesize}{1pt}
-%\TPMargin{0pt}
-\textblockrulecolour{red!70!black}
-%\textblockrulecolour{white}
-\textblockcolour{red!10!white}
-\setbeamercolor*{item}{fg=red!70!black}
-
-\begin{center}
-\includegraphics<1>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsHW}
-\includegraphics<2>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL0}
-\includegraphics<3>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL1}
-\includegraphics<4>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levelsL2}
-\includegraphics<5>[width=\textwidth,height=0.8\textheight,keepaspectratio]{levels}
-\end{center}
-
-\only<2->{
-\setlength{\leftmargini}{16pt}
-\footnotesize \color{black} 
- \begin{textblock}{5}(10,2.2)
-  \only<2>{
-	  \begin{itemize}
-	  \setlength\itemsep{-3pt}
-	   \item Discover Devices 
-	   \item Open Connection 
-	   \item TX RX Data 
-	   \item Close Connection
-	  \end{itemize}
-  }
-  \only<3>{
-	  \begin{itemize}
-	  \setlength\itemsep{-3pt}
-%	  \item Login
-%	  \item Encrypt Data
-%	  \item Decrypt Data
-%	  \item Digest (Sign) Data 	  
-    \item Pin and Keys init.
-    \item Login \& Logout
-    \item Information retrieval
-    \item Encryption/decryption
-    \item Digest (Sign)
-    \item Key management 	  
-	  \end{itemize}
-  }
-  \only<4>{
-	  \begin{itemize}
-	  \setlength\itemsep{-3pt}
-	  \item SEfile
-	  \item secureSQLite
-	  \item SElink
-	  \end{itemize}
-   }  
-  
-  \only<5>{
-    \vspace{5pt}
-    \hspace{5pt}\textbf{Applications}
-  	\begin{itemize}
-	  \setlength\itemsep{-3pt}
-	  \item secureSQLiteBrowser
-	  \item \textbf{\color{red!70!black} SEcubeWallet}
-	  \end{itemize}
-	  }
- \end{textblock}
-}
-
-\end{frame}
 
 %---------------------------------------------------------------
 
-\section{Design and implementation}
-
-\subsection{Basic SEcube™ Operation}
+\section{CMIP5 Models}
 
 \begin{frame}
-	\frametitle{Basic SEcube™ Operation}
+	\frametitle{CMIP5 Models}
+{\fontsize{13pt}{14}\selectfont	
+	\begin{itemize}
+	\setlength\itemsep{10pt}
+	 \item<2-> Set di dati multi-modello progettato per aumentare la nostra conoscenza del clima, la sua variabilità e il suo cambiamento attraverso l'applicazione di GCMs:
+	  \item<3-> Rispondono a concentrazioni specifiche e variabili nel tempo di vari componenti atmosferi.
+	 \item<4-> I CMIP5 rappresenta due grandi gruppi di esperimenti di modellazione del cambiamento climatico:
+	   \begin{itemize}
+	      \item<5-> {\fontsize{12pt}{14}\selectfont Integrazione a lungo termine.}
+	       \begin{itemize}
+	       \item Sperimento storico (1850-2005)
+	       \item Proiezioni futuri (2006-2100)
+	       \end{itemize}
+	      \item<6-> {\fontsize{12pt}{14}\selectfont Integrazione a breve termine}
+	   \end{itemize}
+		  
+	 
+	\end{itemize}
+	
+%\begin{alertblock}<6->{The data (passwords) can only be accessed if:}
+% \begin{itemize}
+%       \setlength\itemsep{0pt}
+%	     \item<2-> SEcube™ device is connected
+%	     \item<2-> Login pin is the correct one
+%	     \item<2-> Key inside the device is the correct one.
+%	   \end{itemize}
+%\end{alertblock}	
+}	
+\end{frame}
+
+
+%---------------------------------------------------------------
+\section{Software utilizzato}
+
+\begin{frame}
+	\frametitle{Python}
 {\fontsize{13pt}{14}\selectfont	
 	\begin{itemize}
 	\setlength\itemsep{10pt}
@@ -375,44 +415,101 @@ The following open source libraries were used:
 }	
 \end{frame}
 
-\subsection{General Architecture}
 
+%---------------------------------------------------------------
+
+\section{Climate Change Indices ETCCDI}
 \begin{frame}
-	\only<1>{\frametitle{SEcubeWallet Application}}
-	\only<2>{\frametitle{Open device and authenticate}}
-	\only<3>{\frametitle{Create In-memory Wallet}}
-	\only<4>{\frametitle{Generate Password/Passphrase}}
-	\only<5>{\frametitle{Evaluate Strength}}
-	\only<6>{\frametitle{Encrypt and Save Wallet to disk}}
-	\only<7>{\frametitle{General Architecture}}
-	\begin{center}
-	\includegraphics<1>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignOnly}
-	\includegraphics<2>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignLog}
-	\includegraphics<3>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignInMem}
-	\includegraphics<4>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignGen}
-	\includegraphics<5>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignZ}
-	\includegraphics<6>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesignDisk}
-	\includegraphics<7>[width=\textwidth,height=0.85\textheight,keepaspectratio]{BasicDesign}
-	
-	\end{center}
+\frametitle{Indici ETCCDI} 
+
+  \begin{figure}
+      \includegraphics<2->[width=\linewidth]{etccdi}	
+	\end{figure}
 \end{frame}
 
 
 
+
+
+%\subsection{bubbles}
+%\begin{frame}
+%\smartdiagram[bubble diagram]{
+%  a,
+%  b, 
+%  c, 
+%  d, 
+%  e, 
+%  f,
+%  g
+%}
+%\end{frame}
+
+%\begin{frame}
+%\frametitle{Indici ETCCDI}
+%\begin{center}
+%\smartdiagramset{set color list={red!40,cyan!40!,cyan!40,blue!40!},uniform connection color=true}
+%
+%{\small
+%\smartdiagram[descriptive diagram]{
+%{\footnotesize Absolute,The set up operation consist of..},
+%{\footnotesize Threshold, {After having set up the program, you must run..}},
+%{\footnotesize Duration, You must check what did with analytical tools like..},
+%{\footnotesize Percentiles, {After the analysis, you can still modify or add..}},}
+%}
+%\end{center}
+%\end{frame}
+
+
+%\begin{frame}
+%	\frametitle{In-Memory and In-Disk DBs}
+%  We want to achieve both	 security and efficiency:
+%	
+%  \begin{itemize}
+%  \setlength\itemsep{10pt}
+%    \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
+%    \item<3-> \textbf{Save Wallet:} An In-disk encrypted secureSQLite DB is created and populated with the In-memory DB contents
+%    \item<4-> \textbf{Open Wallet:} The selected In-disk DB is decrypted and its contents are dumped into an In-memory DB
+%    \item<5-> \textbf{Delete Wallet:} Both the In-memory DB and the In-disk encrypted file are deleted.
+%  \end{itemize}
+%\end{frame}
+
+\subsection{Duration}
+
 \begin{frame}
-	\frametitle{In-Memory and In-Disk DBs}
-  We want to achieve both	 security and efficiency:
-	
+	\frametitle{Windows and display elements}
+
   \begin{itemize}
-  \setlength\itemsep{10pt}
-    \item<2-> \textbf{New Wallet:} An In-memory SQLite DB is created.
-    \item<3-> \textbf{Save Wallet:} An In-disk encrypted secureSQLite DB is created and populated with the In-memory DB contents
-    \item<4-> \textbf{Open Wallet:} The selected In-disk DB is decrypted and its contents are dumped into an In-memory DB
-    \item<5-> \textbf{Delete Wallet:} Both the In-memory DB and the In-disk encrypted file are deleted.
-  \end{itemize}
+    \setlength\itemsep{10pt}
+    \item<1-> Main Window
+      \begin{itemize}
+		    \item<2-> \textbf{\color{NavyBlue} Table View:} for displaying the wallet entries
+	\begin{table}
+		\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		\textbf{Username} & \textbf{Domain} & \textbf{Password} & \textbf{Date} &\textbf{Description}  \\ 
+		\hline
+		\end{tabular}
+		\end{table}
+				    
+		    
+		    \item<3-> \textbf{\color{NavyBlue} Filters:} So the user can search in each of the table's columns.
+		    \item<4-> \textbf{\color{NavyBlue} Tool Bars:} Open Wallet, Save Wallet, Add entry etc.
+		    \item<5-> \textbf{\color{NavyBlue} Status Bar:} Used to display messages and the wallet's name
+      \end{itemize}
+      
+     \item<6-> Preference Window
+       \begin{itemize}
+	       \item Password Generators Configuration.
+	       \item zxcvbn Configuration.
+	     \end{itemize}
+     \item<7-> Help Window
+     \item<8-> Environment Window
+	 \end{itemize}
 \end{frame}
 
-\subsection{Implementation details}
+
+
+\subsection{Percentiles}
 
 \begin{frame}
 	\frametitle{Windows and display elements}
@@ -516,7 +613,7 @@ The following open source libraries were used:
 
 %-------------------------------------------
 
-\section{Demos}
+\section{Resultati}
 
 \begin{frame}
 \frametitle{Login and Open a Wallet}
@@ -551,7 +648,7 @@ The following open source libraries were used:
 	\end{center}
 \end{frame}
 
-\section{Conclusions}
+\section{Conclusioni}
 \begin{frame}
 	\frametitle{Conclusions}
 	\begin{itemize}
@@ -564,7 +661,7 @@ The following open source libraries were used:
 	\end{itemize}
 \end{frame}
 
-\section{Future Work}
+\section{Lavoro Futuro}
 \begin{frame}
 	\frametitle{Future Work}
 	{
