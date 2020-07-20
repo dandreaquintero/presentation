@@ -18,6 +18,13 @@
 \includegraphics<10>[width=\textwidth,height=0.9\textheight,keepaspectratio]{process_images/process10}
 \includegraphics<11>[width=\textwidth,height=0.9\textheight,keepaspectratio]{process_images/process11}
 
+\only<1>{
+  \setlength{\leftmargini}{16pt}
+  \scriptsize
+  \begin{textblock}{4.5}(11.2,13.5)
+     {\color{gray} Scaricati da \href{https://esgf-node.llnl.gov/search/cmip5/}{\color{blue}{\underline{https://esgf-node.llnl.gov/}}}}
+  \end{textblock}
+}
 
 \only<2>{
   \setlength{\leftmargini}{16pt}
@@ -52,7 +59,19 @@
   \setlength{\leftmargini}{16pt}
   \scriptsize
   \begin{textblock}{4.5}(11.2,9.6)
-      {\color{gray} Mediana tra tutti i modelli}
+	\begin{itemize}
+	    \item {\color{gray} Mediana tra tutti i modelli}
+	    \item {\color{gray} 25° e 75° percentile}
+    \end{itemize}      
+      
+ \end{textblock}
+}
+
+\only<9>{
+  \setlength{\leftmargini}{16pt}
+  \scriptsize
+  \begin{textblock}{4.5}(11.2,4.5)
+      {\color{gray} Rappresentazione standard di array multidimensionali in Python}
  \end{textblock}
 }
 
@@ -60,9 +79,25 @@
   \setlength{\leftmargini}{16pt}
   \scriptsize
   \begin{textblock}{4.5}(11.2,2.5)
-      {\color{gray} Serie Storica} \\
-      {\color{gray} Mappa} \\
-      {\color{gray} Grafico a Barre}
+  	\begin{itemize}
+      \item {\color{gray} Serie Storica} \\
+      \item {\color{gray} Mappa} \\
+      \item {\color{gray} Grafico a Barre}
+     \end{itemize}
+ \end{textblock}
+}
+
+\only<11>{
+  \setlength{\leftmargini}{16pt}
+  \scriptsize
+  \begin{textblock}{4.5}(11.2,2.5)
+    {\color{gray} Questa procedura viene fatta per ogni combinazione di:}
+  	\begin{itemize}
+  	  \item {\color{gray} Indice (27) }
+      \item {\color{gray} Modello (circa 30)} 
+      \item {\color{gray} Regione (2)} 
+      \item {\color{gray} Esperimento (3)}
+     \end{itemize}
  \end{textblock}
 }
 
