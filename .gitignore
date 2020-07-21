@@ -1,10 +1,10 @@
 .directory                                                                                 
 *.aux
-presentation.bbl
-presentation.blg
-presentation.log
-presentation.nav
+*.bbl
+*.blg
+*.log
+*.nav
 *.out
-presentation.snm
-presentation.synctex.gz
-presentation.toc        
+*.snm
+*.synctex.gz
+*.toc        
